@@ -1,0 +1,18 @@
+Ejercicio grupal: Sistema de puntos
+
+Crear un sistema que permita:
+
+* Crear cuentas de puntos canjeables por premios (tipo laa q usan laa empresa para fidelizar clientes)
+* Laa cuentas tendran aaociado un nombre, apellido e email. Tendran un saldo en puntos
+
+Acciones funcionales:
+
+- Buscar una cuenta
+- Cargar puntos a una cuenta
+- Canjear premios (listar, elegir, verificar saldo y canjear,  descontando los puntos)
+- Listar los premios canjeados de una cuenta
+
+Reqs no funcionales
+
+- Persistir los datos (es decir q se guarden de alguna manera)
+- Alguna interfaz interactiva (puede ser consola)
