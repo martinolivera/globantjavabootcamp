@@ -1,9 +1,11 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
 
+import model.Premio;
 import controller.Controller;
-
+ 
 public class View {
 
 	Scanner sc = new Scanner(System.in);
@@ -48,11 +50,14 @@ public class View {
 	}
 	
 	private void registrarCuenta() {
-		
+		//Al llamar al método correspondiente, deberá enviarse los datos a agregar, inicialmente no tiene puntos agregados.
+		//controller.registrarCuentaController(int id, String nombre, String apellido, String email,
+		//int puntos, List<Premio> premiosCuenta)
 	}
 	
 	private void buscarCuenta() {
-		
+		//De alguna manera necesitamos saber el mail con el cual buscar, para después. 
+		//Se envía un mensaje al objeto controller. 
 	}
 	
 	private void cargarPuntosEnCuenta() {
