@@ -53,6 +53,7 @@ public class View {
 		//Al llamar al método correspondiente, deberá enviarse los datos a agregar, inicialmente no tiene puntos agregados.
 		//controller.registrarCuentaController(int id, String nombre, String apellido, String email,
 		//int puntos, List<Premio> premiosCuenta)
+		//Se recibe un booleano, sirve para informar si la cuenta ya existe en el sistema.
 	}
 	
 	private void buscarCuenta() {

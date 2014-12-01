@@ -14,10 +14,15 @@ public class Controller {
 	private List<Premio> listaPremios = new ArrayList<Premio>();
 	
 	//Methods
-	public void registrarCuentaController(int id, String nombre, String apellido, String email,
+	public boolean registrarCuentaController(int id, String nombre, String apellido, String email,
 			int puntos, List<Premio> premiosCuenta) {
-		Cuenta c = new Cuenta(id, nombre, apellido, email, puntos, premiosCuenta);
-		this.getListaCuentas().add(c);	
+		//Debo verificar que no exista la cuenta ya:
+		if (this.buscarCuentaController(email)){
+			Cuenta c = new Cuenta(id, nombre, apellido, email, puntos, premiosCuenta);
+			this.getListaCuentas().add(c);
+			return true;
+		}
+		return false;
 	}
 	
 	//Method should to receive email to compare with saved methods (corrijanme si escribo como el culo)
