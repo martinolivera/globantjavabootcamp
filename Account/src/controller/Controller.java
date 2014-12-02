@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import model.Cuenta;
@@ -16,8 +15,9 @@ public class Controller {
 	//Methods
 	public boolean registrarCuentaController(int id, String nombre, String apellido, String email,
 			int puntos, List<Premio> premiosCuenta) {
-		//Debo verificar que no exista la cuenta ya:
-		if (this.buscarCuentaController(email)){
+		//Debo verificar que no exista la cuenta ya: 
+		//Utilizar el método buscarCuenta y compararlo con null me parece horrible, pensar una mejor manera.
+		if (this.buscarCuentaController(email) != null){
 			Cuenta c = new Cuenta(id, nombre, apellido, email, puntos, premiosCuenta);
 			this.getListaCuentas().add(c);
 			return true;
@@ -25,19 +25,22 @@ public class Controller {
 		return false;
 	}
 	
-	//Method should to receive email to compare with saved methods (corrijanme si escribo como el culo)
-	public boolean buscarCuentaController(String email) {
-		//Returns true if Account with mail it is included in list.
+	//Method should to receive email to compare with saved Cuentas (corrijanme si escribo como el culo)
+	public Cuenta buscarCuentaController(String email) {
+		//Returns Cuenta if account with mail is included in list.
 		List<Cuenta> list = this.getListaCuentas();
+		Cuenta c = null;
 		boolean ok = false;
 		int counter=0;
 		int limit = list.size();
 		while (!ok && counter < limit){
-			if (list.get(counter).getEmail().equals(email))
+			if (list.get(counter).getEmail().equals(email)){
 				ok= true;
+				c = list.get(counter);
+			}
 			counter++;
 		}
-		return ok;
+		return c;
 	}
 	
 	private void cargarPuntosController() {

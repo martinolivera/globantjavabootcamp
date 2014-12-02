@@ -50,6 +50,7 @@ public class View {
 	}
 	
 	private void registrarCuenta() {
+		//Aquí debo tomar los datos ingresados por teclado y almacenarlos, ver la manera de verificar si son datos válidos. 
 		//Al llamar al método correspondiente, deberá enviarse los datos a agregar, inicialmente no tiene puntos agregados.
 		//controller.registrarCuentaController(int id, String nombre, String apellido, String email,
 		//int puntos, List<Premio> premiosCuenta)
