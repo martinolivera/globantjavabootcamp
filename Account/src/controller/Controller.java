@@ -13,9 +13,9 @@ public class Controller {
 	private List<Premio> listaPremios = new ArrayList<Premio>();
 	
 	//Methods
-	public boolean registrarCuentaController(int id, String nombre, String apellido, String email,
-			int puntos, List<Premio> premiosCuenta) {
-		//Debo verificar que no exista la cuenta ya: 
+	public boolean registrarCuentaController(int id, String nombre, String apellido, String email) {
+		int puntos = 0; 
+		List<Premio> premiosCuenta = new ArrayList<Premio>();
 		//Utilizar el método buscarCuenta y compararlo con null me parece horrible, pensar una mejor manera.
 		if (this.buscarCuentaController(email) != null){
 			Cuenta c = new Cuenta(id, nombre, apellido, email, puntos, premiosCuenta);

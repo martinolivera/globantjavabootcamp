@@ -3,6 +3,7 @@ package view;
 import java.util.List;
 import java.util.Scanner;
 
+import model.Cuenta;
 import model.Premio;
 import controller.Controller;
  
@@ -30,9 +31,10 @@ public class View {
 		switch (opcion) {
 		case 1:
 			registrarCuenta();
+			//Informar de éxito o fracaso en la operación.
 			break;
 		case 2:
-			buscarCuenta();
+			Cuenta acc = buscarCuenta();
 			break;
 		case 3:
 			cargarPuntosEnCuenta();
@@ -49,17 +51,24 @@ public class View {
 
 	}
 	
-	private void registrarCuenta() {
-		//Aquí debo tomar los datos ingresados por teclado y almacenarlos, ver la manera de verificar si son datos válidos. 
-		//Al llamar al método correspondiente, deberá enviarse los datos a agregar, inicialmente no tiene puntos agregados.
-		//controller.registrarCuentaController(int id, String nombre, String apellido, String email,
-		//int puntos, List<Premio> premiosCuenta)
-		//Se recibe un booleano, sirve para informar si la cuenta ya existe en el sistema.
+	private boolean registrarCuenta() {
+		System.out.println("Ingrese el código ID de la nueva cuenta: ");
+		int id = sc.nextInt();
+		System.out.println ("Ingrese un email: ");
+		String email= sc.next();
+		System.out.println("Ingrese un nombre de propietario de nueva cuenta: ");
+		String name = sc.next();
+		System.out.println("Ingrese un apellido de propietario de nueva cuenta: ");
+		String surname = sc.next();
+		return controller.registrarCuentaController(id, name, surname, email);
+		//this.readData();
 	}
 	
-	private void buscarCuenta() {
-		//De alguna manera necesitamos saber el mail con el cual buscar, para después. 
-		//Se envía un mensaje al objeto controller. 
+	private Cuenta buscarCuenta() {
+		System.out.println ("Ingrese el email de la cuenta que desea buscar: ");
+		String email= sc.next();		
+		//Utilizar excepción ya que account puede ser nulo.
+		return controller.buscarCuentaController(email);
 	}
 	
 	private void cargarPuntosEnCuenta() {
@@ -77,6 +86,12 @@ public class View {
 	
 	private void restarPuntos(){
 		
+	}
+	
+	//Metodo que almacena valores de teclado:
+	private void readData (){
+		
+
 	}
 
 }
