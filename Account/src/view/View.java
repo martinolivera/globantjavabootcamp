@@ -11,6 +11,7 @@ public class View {
 
 	Scanner sc = new Scanner(System.in);
 	Controller controller = new Controller();
+	Cuenta actual;
 
 	private void menu() {
 		System.out.println("***********************************");
@@ -34,7 +35,7 @@ public class View {
 			//Informar de éxito o fracaso en la operación.
 			break;
 		case 2:
-			Cuenta acc = buscarCuenta();
+			actual = buscarCuenta();
 			break;
 		case 3:
 			cargarPuntosEnCuenta();
@@ -61,7 +62,10 @@ public class View {
 		System.out.println("Ingrese un apellido de propietario de nueva cuenta: ");
 		String surname = sc.next();
 		return controller.registrarCuentaController(id, name, surname, email);
+		//Cuenta c = controller.registrarCuentaController(id, name, surname, email);
 		//this.readData();
+		//Probando si esto funciona, imprimo datos del objeto creado:
+		//System.out.println(name);
 	}
 	
 	private Cuenta buscarCuenta() {
