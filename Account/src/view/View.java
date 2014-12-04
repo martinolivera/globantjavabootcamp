@@ -80,12 +80,74 @@ public class View {
 	}
 	
 	private void canjearPremios() {
-		
-		
+		System.out
+				.println("Ingrese el ID de la cuenta deseada para canjear puntos");
+		int idCuenta = sc.nextInt();
+		if (controller.validarCuenta(idCuenta) != null) {
+			System.out.println("El saldo en puntos de la cuenta es: "
+					+ controller.validarCuenta(idCuenta).getPuntos());
+			System.out.println(" ");
+			menuPremio();
+			int idPremio = sc.nextInt();
+			if (controller.validarPremio(idPremio) != null) {
+				if (controller.canjearPuntosController(idCuenta, idPremio)) {
+					System.out
+							.println("Canje Exitoso, Su nuevo saldo en puntos es: "
+									+ controller.validarCuenta(idCuenta)
+											.getPuntos());
+				} else {
+					System.out
+							.println("Su cuenta no posee los puntos necesarios para este premio");
+					operacionInvalida();
+				}
+			} else {
+				operacionInvalida();
+			}
+		} else {
+			operacionInvalida();
+		}
 	}
-	
+
+	private void operacionInvalida() {
+		System.out.println("Si desea comenzar nuevamente la opracion prione y");
+		String op = sc.next();
+		if (op.contains("y")) {
+			canjearPremios();
+		}
+	}
+
+	private void menuPremio() {
+		System.out.println("PREMIOS: ");
+		for (Premio premio : controller.getListaPremios()) {
+			System.out.println("Nombre: " + premio.getNombrePremio()
+					+ " -- ID: " + premio.getIdPremio() + " -- Puntos: "
+					+ premio.getPuntos());
+		}
+		System.out.println("Ingrese le ID del premio que desea canjear");
+	}
+
 	private void listarPremiosDeUnaCuenta() {
-		
+		System.out
+				.println("Ingrese el ID de cuenta de la cual desea listar los premios");
+		int idCuenta = sc.nextInt();
+		if (controller.validarCuenta(idCuenta) != null) {
+			System.out.println("PREMIOS DE LA CUENTA: ");
+			System.out.println(" ");
+			int i = 1;
+			for (Premio premio : controller.validarCuenta(idCuenta)
+					.getPremiosCuenta()) {
+				System.out.println(i + "NombrePremio: "
+						+ premio.getNombrePremio());
+				i++;
+			}
+		} else {
+			System.out
+					.println("ID invalido, Si desea comenzar nuevamente la opracion prione y");
+			String op = sc.next();
+			if (op.contains("y")) {
+				listarPremiosDeUnaCuenta();
+			}
+		}
 	}
 	
 	private void restarPuntos(){
