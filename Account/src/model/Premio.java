@@ -6,7 +6,7 @@ public class Premio {
 	private int idPremio;
 	private String nombrePremio;
 	private int puntos;
-	  
+	
 	//Constructor
 	public Premio(int idPremio, String nombrePremio, int puntos) {
 		super();
