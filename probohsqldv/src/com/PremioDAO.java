@@ -1,13 +1,13 @@
 package com;
 
 import java.sql.Connection;
-//import java.sql.DriverManager;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 
-public class CuentaDAO {
+public class PremioDAO {
 	
 	protected Connection conn1 = null;  
 	protected Statement  st  = null;  
@@ -31,7 +31,7 @@ public class CuentaDAO {
 	// sacar los static 
 	// tirar a arriba las exceptions
 	
-	public void saveAccount(Cuenta cuenta) throws Throwable {
+	public void saveReward(Premio reward) throws Throwable {
 		
 		// saco los valores de cuenta y los atributos los meto en un insert
 		// Para cada premio, cuenta.getPremios(), para cada premio CuentaPremio.save(idCuenta, idPremio).
@@ -50,37 +50,22 @@ public class CuentaDAO {
 				e.getCause();
 			}   
 		  
-		  //en cp saco la lista con posibles elementos, si  los hay genera la insercion de el idCuenta del objeto con el idPremio del objeto de la collectio en la tabla inermedia
-		  Iterator<Premio> cp = cuenta.getPremiosCuenta().iterator();
-		  
-		  while (cp.hasNext()) {	   	  
-			  sql= "INSERT INTO CuentaPremio (idCuenta, idPremio) VALUES ('" + cuenta.getId() + "', '" + cp.next().getIdPremio()+ "',)";
-			  try {
-				st.executeUpdate(sql);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		  //tengo el next arriba que es el que continua con el puntero en la collection y voy 
-		 //insertando en la tabla intermedia los idPremios que esten en el objeto y tambien el idCuenta		   
-		  }
+
   		  
-          	sql2 ="INSERT INTO Cuenta (idCuenta, nombre, apellido, email, puntos) VALUES ('" + cuenta.getId() + "', '" + cuenta.getNombre()+ "',"
-          		+ "'" + cuenta.getApellido() + "','" + cuenta.getEmail() + "','" + cuenta.getPuntos()+ "') ";
+          	sql2 ="INSERT INTO premio (idCuenta, nombre, apellido, email, puntos) VALUES ('" + reward.getIdPremio() + "', '" + reward.getNombrePremio()+ "',"
+          		+ "'" + reward.getPuntos() + "') ";
 	
 			try {
 				st.executeUpdate(sql2);
 			} catch (SQLException e) {
-				updateAccount(cuenta);
+				updateReward(reward);
 				//e.printStackTrace();
 			}	//un update en el error
 	}
 	
-	public Cuenta findAccountById(Integer id) {
+	public Premio findRewardById(Integer id) {
 		// Para cada premio, cuenta.getPremios(), para cada premio CuentaPremio.save(idCuenta, idPremio).
-		
-		Cuenta cuenta = new Cuenta(id, null, null, null, id, null);
-		Premio premio = new Premio(id, null, id);
+		Premio reward = new Premio(id, null, id);
 		
 				try {
 					conn1=Conectar.connectDB();
@@ -97,13 +82,8 @@ public class CuentaDAO {
 						e.getCause();
 					}   
 				  
-				  
-			/*	  sql="SELECT idCuenta, nombre, apellido, email, puntos FROM cuentaPremio "
-				  		+ "join premio on cuentaPremio.idPremio=premio.idPremio "
-				  		+ "join cuenta on cuenta.idcuenta=cuentapremio.idCuenta where cuenta.idCuenta= '"+id+"' ";
 			
-				  sql= "select idPremio, nombre, puntos from cuentapremio join  "; usar premio creado arriba y meter 
-				  los objetos premio en la cuenta tambien creada arriba*/
+				  sql= "select idPremio, nombrePremio, puntos from  premio";
 				  
 				  try {
 						rst1=st.executeQuery(sql);
@@ -114,14 +94,11 @@ public class CuentaDAO {
 			        try {
 						while (rst1.next()){  
 							
-							cuenta.setId(Integer.parseInt("idCuenta")); //fijrme los tipo
-							cuenta.setNombre("nombre");
-							cuenta.setApellido("apellido");
-							cuenta.setEmail("email");
-							cuenta.setPuntos(Integer.parseInt("puntos"));;
-				//			cuenta.setPremiosCuenta(premiosCuenta); tengo que hacer una busqueda para
+							reward.setIdPremio(Integer.parseInt("idPremio")); //fijrme los tipo
+							reward.setNombrePremio("nombrePremio");
+							reward.setPuntos(Integer.parseInt("puntos"));
 							
-						    System.out.println(rst1.getInt("idCuenta") + " " + rst1.getString("nombre") + " " + rst1.getString("apellido")+" "+ rst1.getString("email")+" "+ rst1.getInt("puntos") );  
+						    System.out.println(rst1.getInt("idPremio") + " " + rst1.getString("nombrePremio") + " " + rst1.getString("puntos") );  
 						}
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -129,19 +106,19 @@ public class CuentaDAO {
 					} 
 				  
 				  
-		return cuenta ;
+		return reward ;
 		
 		//select * from cuenta where id.cuenta=id; throwearlo 
 		
 	}
 	
 	
-	public void deleteAccount(Integer id) {
+	public void delCuentaById(Integer id) {
 		
 		//DELETE FROM cuenta WHERE idCuenta=id ;
 	}
 	
-	public void updateAccount(Cuenta cuenta) throws Throwable {
+	public void updateReward(Premio reward) throws Throwable {
 		
 		try {
 			conn1=Conectar.connectDB();
@@ -158,7 +135,7 @@ public class CuentaDAO {
 				e.getCause();
 			}
 		  
-      sql2 ="UPDATE Cuenta SET (idCuenta='" + cuenta.getId() + ", nombre='" + cuenta.getNombre()+ "', apellido='" + cuenta.getNombre()+ "', email='" + cuenta.getEmail() + "', puntos='" + cuenta.getPuntos()+ "') ";
+      sql2 ="UPDATE Cuenta SET (idCuenta='" + reward.getIdPremio() + ", nombre='" + reward.getNombrePremio()+ "', puntos='" + reward.getPuntos()+"') ";
       	
       st.executeUpdate(sql2);
 		
