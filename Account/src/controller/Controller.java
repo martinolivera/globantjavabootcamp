@@ -12,8 +12,8 @@ public class Controller {
 	Scanner sc = new Scanner(System.in);
 
 	// Attributes
-	List<Cuenta> listaCuentas = new ArrayList<Cuenta>();
-	List<Premio> listaPremios = new ArrayList<Premio>();
+	private List<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+	private List<Premio> listaPremios = new ArrayList<Premio>();
 
 	// Methods
 	
@@ -23,9 +23,13 @@ public class Controller {
 	public boolean registrarCuentaController(int id, String nombre, String apellido, String email) {
 		int puntos = 0;
 		List<Premio> premiosCuenta = new ArrayList<Premio>();
-		// Utilizar el m�todo buscarCuenta y compararlo con null me parece
+		// Utilizar el método buscarCuenta y compararlo con null me parece
 		// horrible, pensar una mejor manera.
-		if (this.buscarCuentaController(email) != null) {
+		//CuentaDAO dao = new CuentaDAO();
+		//El metodo para obtener cuenta de la lista supone que se levanta todas las cuentas y se la guarda en una lista. Hay algo que podría cambiarse en este punto y que se levante la cuenta directamente:
+		
+		
+		if (this.buscarCuentaController(id) != null) {
 			Cuenta c = new Cuenta(id, nombre, apellido, email, puntos,
 					premiosCuenta);
 			this.getListaCuentas().add(c);
@@ -34,7 +38,7 @@ public class Controller {
 		return false;
 	}
 
-	public Cuenta buscarCuentaController(String email) {
+	public Cuenta buscarCuentaController(int id) {
 		// Returns Cuenta if account with mail is included in list.
 		List<Cuenta> list = this.getListaCuentas();
 		Cuenta c = null;
@@ -42,7 +46,7 @@ public class Controller {
 		int counter = 0;
 		int limit = list.size();
 		while (!ok && counter < limit) {
-			if (list.get(counter).getEmail().equals(email)) {
+			if (list.get(counter).getId() == id) {
 				ok = true;
 				c = list.get(counter);
 			}
@@ -108,6 +112,4 @@ public class Controller {
 		this.listaPremios = listaPremios;
 	}
 	
-}
-
 }

@@ -69,10 +69,10 @@ public class View {
 	}
 	
 	private Cuenta buscarCuenta() {
-		System.out.println ("Ingrese el email de la cuenta que desea buscar: ");
-		String email= sc.next();		
+		System.out.println ("Ingrese el número de la cuenta que desea buscar: ");
+		int id= sc.nextInt();		
 		//Utilizar excepción ya que account puede ser nulo.
-		return controller.buscarCuentaController(email);
+		return controller.buscarCuentaController(id);
 	}
 	
 	private void cargarPuntosEnCuenta() {
