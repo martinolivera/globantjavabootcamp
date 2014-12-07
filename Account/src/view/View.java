@@ -1,5 +1,6 @@
 package view;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,10 +33,14 @@ public class View {
 		switch (opcion) {
 		case 1:
 			registrarCuenta();
-			//Informar de éxito o fracaso en la operación.
 			break;
 		case 2:
-			actual = buscarCuenta();
+			try {
+				actual = buscarCuenta();
+			} catch (SQLException e) {
+				e.getMessage();
+				//e.printStackTrace();
+			}
 			break;
 		case 3:
 			cargarPuntosEnCuenta();
@@ -52,7 +57,7 @@ public class View {
 
 	}
 	
-	private boolean registrarCuenta() {
+	private void registrarCuenta() {
 		System.out.println("Ingrese el código ID de la nueva cuenta: ");
 		int id = sc.nextInt();
 		System.out.println ("Ingrese un email: ");
@@ -61,16 +66,16 @@ public class View {
 		String name = sc.next();
 		System.out.println("Ingrese un apellido de propietario de nueva cuenta: ");
 		String surname = sc.next();
-		return controller.registrarCuentaController(id, name, surname, email);
-		//Cuenta c = controller.registrarCuentaController(id, name, surname, email);
-		//this.readData();
-		//Probando si esto funciona, imprimo datos del objeto creado:
-		//System.out.println(name);
+		try {
+			controller.registrarCuentaController(id, name, surname, email);
+		} catch (Throwable e) {
+			e.getMessage();
+		}
 	}
 	
-	private Cuenta buscarCuenta() {
+	private Cuenta buscarCuenta() throws SQLException {
 		System.out.println ("Ingrese el número de la cuenta que desea buscar: ");
-		int id= sc.nextInt();		
+		int id= sc.nextInt();
 		//Utilizar excepción ya que account puede ser nulo.
 		return controller.buscarCuentaController(id);
 	}
@@ -152,12 +157,6 @@ public class View {
 	
 	private void restarPuntos(){
 		
-	}
-	
-	//Metodo que almacena valores de teclado:
-	private void readData (){
-		
-
 	}
 
 }
