@@ -16,6 +16,7 @@ public class Conectar {
 			System.out.println("Armada la  conexion 3");
 			conexion = DriverManager.getConnection(url, "root", "1234");
 
+			
 			System.out.println("Armada la  conexion x");
 
 		} catch (ClassNotFoundException e1) {
