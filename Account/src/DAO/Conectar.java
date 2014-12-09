@@ -27,7 +27,7 @@ public class Conectar {
 		/*
 		 * finally { try { if (conexion != null) conexion.close(); } catch
 		 * (SQLException se) { } }
-		 */
+		 **/
 
 		System.out.println("Armada la  conexion ssss");
 

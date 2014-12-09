@@ -17,15 +17,16 @@ public class PremioDAO {
 	protected ResultSet  rst1 = null;
       
 	public void saveReward(Premio reward) throws Throwable {
-		
+		//conecto a la bd
 		st=Conectar.connectDB().createStatement();
 
-  		  
+  		  //armo query sql, para insertar un reward/premio
           	sql ="INSERT INTO premio (idPremio, nombrePremio, puntos) "
           			+ "VALUES ('" + reward.getIdPremio() + "', '" + reward.getNombrePremio()+ "','" + reward.getPuntos() + "') ";
           	
           	
 			try {
+				//execute query dentro de sql
 				st.executeUpdate(sql);
 			} catch (SQLException e) {
 				updateReward(reward);
@@ -43,14 +44,13 @@ public class PremioDAO {
 		
 		
 		// Para cada premio, cuenta.getPremios(), para cada premio CuentaPremio.save(idCuenta, idPremio).
-		Premio reward = new Premio(id, null, id);
+		Premio reward =null;
 		
 				  sql= "select idPremio, nombrePremio, puntos from  premio where idPremio=" + id + "  ";
 				  
 				  try {
 						rst1=st.executeQuery(sql);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}  
 			        try {
@@ -62,15 +62,11 @@ public class PremioDAO {
 							 System.out.println(rst1.getInt("idpremio") + " " + rst1.getString("nombrePremio") + " " + rst1.getInt("puntos") ); 
 						}
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} 
 				  
 				  
-		return reward ;
-		
-		//select * from cuenta where id.cuenta=id; throwearlo 
-		
+		return reward ;		
 	}
 	
 	
@@ -79,7 +75,6 @@ public class PremioDAO {
 		try {
 			st=Conectar.connectDB().createStatement();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -88,7 +83,7 @@ public class PremioDAO {
 		try {
 			st.execute(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -99,7 +94,9 @@ public class PremioDAO {
 		
       st=Conectar.connectDB().createStatement();
 
-      sql2 ="UPDATE premio SET   nombrePremio='" + reward.getNombrePremio()+ "' , puntos='" + reward.getPuntos()+"' where idpremio=" + reward.getIdPremio() + "";
+      sql2 ="UPDATE premio "
+      		+ "SET   nombrePremio='" + reward.getNombrePremio()+ "' , puntos='" + reward.getPuntos()+"'"
+      				+ " where idpremio=" + reward.getIdPremio() + "";
       st.executeUpdate(sql2);
 				
 	}
