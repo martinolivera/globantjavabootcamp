@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import DAO.Conectar;
 import model.Premio;
+
 
 public class PremioDAO {
 	
@@ -21,9 +21,10 @@ public class PremioDAO {
 		st=Conectar.connectDB().createStatement();
 
   		  
-          	sql ="INSERT INTO premio (idCuenta, nombre, apellido, email, puntos) VALUES ('" + reward.getIdPremio() + "', '" + reward.getNombrePremio()+ "',"
-          		+ "'" + reward.getPuntos() + "') ";
-	
+          	sql ="INSERT INTO premio (idPremio, nombrePremio, puntos) "
+          			+ "VALUES ('" + reward.getIdPremio() + "', '" + reward.getNombrePremio()+ "','" + reward.getPuntos() + "') ";
+          	
+          	
 			try {
 				st.executeUpdate(sql);
 			} catch (SQLException e) {
@@ -55,11 +56,10 @@ public class PremioDAO {
 			        try {
 						while (rst1.next()){  
 							
-							reward.setIdPremio(Integer.parseInt("idPremio")); //fijrme los tipo
+							reward.setIdPremio(rst1.getInt("idpremio")); //fijrme los tipo
 							reward.setNombrePremio("nombrePremio");
-							reward.setPuntos(Integer.parseInt("puntos"));
-							
-						    System.out.println(rst1.getInt("idPremio") + " " + rst1.getString("nombrePremio") + " " + rst1.getString("puntos") );  
+							reward.setPuntos(rst1.getInt("puntos"));
+							 System.out.println(rst1.getInt("idpremio") + " " + rst1.getString("nombrePremio") + " " + rst1.getInt("puntos") ); 
 						}
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -83,7 +83,7 @@ public class PremioDAO {
 			e.printStackTrace();
 		}
 		
-		sql="DELETE FROM  premios WHERE idPremio="+id+"";
+		sql="DELETE FROM  premio WHERE idpremio="+id+"";
 		
 		try {
 			st.execute(sql);
@@ -99,8 +99,7 @@ public class PremioDAO {
 		
       st=Conectar.connectDB().createStatement();
 
-      sql2 ="UPDATE Cuenta SET (idCuenta= " + reward.getIdPremio() + ", nombre='" + reward.getNombrePremio()+ "', puntos='" + reward.getPuntos()+"') ";
-      	
+      sql2 ="UPDATE premio SET   nombrePremio='" + reward.getNombrePremio()+ "' , puntos='" + reward.getPuntos()+"' where idpremio=" + reward.getIdPremio() + "";
       st.executeUpdate(sql2);
 				
 	}
