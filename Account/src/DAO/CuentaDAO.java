@@ -144,16 +144,15 @@ public class CuentaDAO {
 
 	}
 
-	
 	public void seeAll() {
 
 		try {
 			st  = Conectar.connectDB().createStatement(); 
-
-				rst1 = st.executeQuery("select * from premio");
+			//muestra todo lo que hay en tabla cuentas
+				rst1 = st.executeQuery("select * from cuenta");
 				int c=0;
 				while (rst1.next()){   
-					System.out.println("Fila"+ c+" " + rst1.getInt("idpremio") + " " + rst1.getString("nombrePremio") + " " + rst1.getInt("puntos") );  
+					System.out.println("Fila"+ c+" " + rst1.getInt("idcuenta") + " " + rst1.getString("nombre") + "  " + rst1.getString("apellido") + "  " + rst1.getString("email") + " " + rst1.getInt("puntos") );  
 					c++;   		
 				}
 		} catch (SQLException e) {			

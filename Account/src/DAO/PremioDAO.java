@@ -100,6 +100,20 @@ public class PremioDAO {
 				
 	}
 	
-	
+	public void seeAll() {
+
+		try {
+			st  = Conectar.connectDB().createStatement(); 
+			//muestra todo lo que hay en tabla cuentas
+				rst1 = st.executeQuery("select * from premio");
+				int c=0;
+				while (rst1.next()){   
+					System.out.println("Fila"+ c+" " + rst1.getInt("idpremio") + " " + rst1.getString("nombrePremio") + " " + rst1.getInt("puntos") );  
+					c++;   		
+				}
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		}
+	}
 	
 }

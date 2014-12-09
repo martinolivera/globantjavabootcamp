@@ -25,7 +25,7 @@ public class Conectar {
 		} catch (SQLException e) {
 			System.out.println("Error DB: " + e);
 		}
-		/*hola
+		/*hola 2
 		 * finally { try { if (conexion != null) conexion.close(); } catch
 		 * (SQLException se) { } }
 		 */
