@@ -1,9 +1,11 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import DAO.CuentaDAO;
 import model.Cuenta;
 import model.Premio;
 
@@ -14,44 +16,26 @@ public class Controller {
 	// Attributes
 	private List<Cuenta> listaCuentas = new ArrayList<Cuenta>();
 	private List<Premio> listaPremios = new ArrayList<Premio>();
+	private CuentaDAO cuentaDAO;
 
+	//Constructor
+	
+	public Controller() {
+		setCuentaDAO(new CuentaDAO());
+	}
+	
 	// Methods
 	
-	public void Controller() {
-		
-	}
-	public boolean registrarCuentaController(int id, String nombre, String apellido, String email) {
+	public void registrarCuentaController(int id, String nombre, String apellido, String email) throws Throwable  {
 		int puntos = 0;
 		List<Premio> premiosCuenta = new ArrayList<Premio>();
-		// Utilizar el método buscarCuenta y compararlo con null me parece
-		// horrible, pensar una mejor manera.
-		//CuentaDAO dao = new CuentaDAO();
-		//El metodo para obtener cuenta de la lista supone que se levanta todas las cuentas y se la guarda en una lista. Hay algo que podría cambiarse en este punto y que se levante la cuenta directamente:
-		
-		
-		if (this.buscarCuentaController(id) != null) {
-			Cuenta c = new Cuenta(id, nombre, apellido, email, puntos,
-					premiosCuenta);
-			this.getListaCuentas().add(c);
-			return true;
-		}
-		return false;
+		Cuenta c = new Cuenta(id, nombre, apellido, email, puntos,
+				premiosCuenta);
+		this.getCuentaDAO().saveAccount(c);
 	}
 
-	public Cuenta buscarCuentaController(int id) {
-		// Returns Cuenta if account with mail is included in list.
-		List<Cuenta> list = this.getListaCuentas();
-		Cuenta c = null;
-		boolean ok = false;
-		int counter = 0;
-		int limit = list.size();
-		while (!ok && counter < limit) {
-			if (list.get(counter).getId() == id) {
-				ok = true;
-				c = list.get(counter);
-			}
-			counter++;
-		}
+	public Cuenta buscarCuentaController(int id) throws SQLException {
+		Cuenta c = this.getCuentaDAO().findAccountById(id);
 		return c;
 	}
 
@@ -110,6 +94,14 @@ public class Controller {
 
 	public void setListaPremios(List<Premio> listaPremios) {
 		this.listaPremios = listaPremios;
+	}
+
+	public CuentaDAO getCuentaDAO() {
+		return cuentaDAO;
+	}
+
+	public void setCuentaDAO(CuentaDAO cuentaDAO) {
+		this.cuentaDAO = cuentaDAO;
 	}
 	
 }
