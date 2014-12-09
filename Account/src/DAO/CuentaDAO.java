@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
+
+import DAO.Conectar;
+
 import model.Cuenta;
 import model.Premio;
 
@@ -36,7 +39,6 @@ public class CuentaDAO {
 			try {
 				st.executeUpdate(sql);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -142,4 +144,21 @@ public class CuentaDAO {
 
 	}
 
+	
+	public void seeAll() {
+
+		try {
+			st  = Conectar.connectDB().createStatement(); 
+
+				rst1 = st.executeQuery("select * from premio");
+				int c=0;
+				while (rst1.next()){   
+					System.out.println("Fila"+ c+" " + rst1.getInt("idpremio") + " " + rst1.getString("nombrePremio") + " " + rst1.getInt("puntos") );  
+					c++;   		
+				}
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		}
+	}
+	
 }

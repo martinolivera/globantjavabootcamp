@@ -17,6 +17,7 @@ public class PremioDAO {
 	protected ResultSet  rst1 = null;
       
 	public void saveReward(Premio reward) throws Throwable {
+		
 		//conecto a la bd
 		st=Conectar.connectDB().createStatement();
 
@@ -35,7 +36,6 @@ public class PremioDAO {
 	}
 	
 	public void saveSeveralAwards() {
-		
 	}
 
 	public Premio findRewardById(Integer id) throws SQLException {
@@ -64,8 +64,7 @@ public class PremioDAO {
 					} catch (SQLException e) {
 						e.printStackTrace();
 					} 
-				  
-				  
+				  			  
 		return reward ;		
 	}
 	
