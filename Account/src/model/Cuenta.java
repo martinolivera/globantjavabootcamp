@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import model.Premio;
+
 public class Cuenta {
 	
 	//Attributes
@@ -22,6 +24,12 @@ public class Cuenta {
 		this.email = email;
 		this.puntos = puntos;
 		this.premiosCuenta = premiosCuenta;
+	}
+	
+	//agregado por Cesar
+	public Cuenta() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	//Getters and Setters
@@ -72,4 +80,13 @@ public class Cuenta {
 	public void setPremiosCuenta(List<Premio> premiosCuenta) {
 		this.premiosCuenta = premiosCuenta;
 	}
+	
+	
+	//Agregaado por Cesar -
+	public void setPremio(Premio p) {
+		
+		this.premiosCuenta.add(p);
+		
+	}
+	
 }

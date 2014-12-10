@@ -14,6 +14,11 @@ public class Premio {
 		this.nombrePremio = nombrePremio;
 		this.puntos = puntos;
 	}
+	
+	//Agregado por Cesar
+	public Premio() {
+		// constructor por defecto
+	}
 
 	//Getters and Setters
 	public int getIdPremio() {
