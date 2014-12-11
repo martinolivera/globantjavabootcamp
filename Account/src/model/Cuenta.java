@@ -26,6 +26,18 @@ public class Cuenta {
 		this.premiosCuenta = premiosCuenta;
 	}
 	
+	//sobre carga
+	public Cuenta(int id, String nombre, String apellido, String email,
+			int puntos) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.puntos = puntos;
+		
+	}
+	
 	//agregado por Cesar
 	public Cuenta() {
 		super();
