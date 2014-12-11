@@ -82,11 +82,4 @@ public class Cuenta {
 	}
 	
 	
-	//Agregaado por Cesar -
-	public void setPremio(Premio p) {
-		
-		this.premiosCuenta.add(p);
-		
-	}
-	
 }
