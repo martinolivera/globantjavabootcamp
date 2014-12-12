@@ -1,5 +1,6 @@
 package helpers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import DAO.CuentaDAO;
@@ -24,7 +25,7 @@ public class CuentaProxy {
 		miCuenta.setPuntos(puntos);
 	}
 	
-	public List<Premio> getPremiosCuenta() {
+	public List<Premio> getPremiosCuenta() throws SQLException {
 		if (miCuenta.getPremiosCuenta() == null) {
 			PremioDAO dao = new PremioDAO();
 			List<Premio> lista = dao.findByCuenta (miCuenta.getId());
