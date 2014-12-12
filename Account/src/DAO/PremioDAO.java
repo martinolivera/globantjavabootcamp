@@ -10,10 +10,6 @@ import java.util.Iterator;
 
 
 
-
-
-
-
 import model.Cuenta;
 import model.Premio;
 

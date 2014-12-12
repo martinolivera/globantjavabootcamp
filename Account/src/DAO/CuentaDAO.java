@@ -76,12 +76,8 @@ public class CuentaDAO {
 		// este ID es de de cuenta
 		st = Conectar.connectDB().createStatement();
 
-
-				
-
 		// etapa donde se obtiene todos los premios asociados al paremetro
 		// idcuenta/id
-
 		sql="select premio.idpremio, nombrePremio, premio.puntos "
 				+ "from  cuentapremio join premio on cuentapremio.idpremio = premio.idpremio "
 				+ "where cuentapremio.idcuenta ='"+id.toString()+"'";

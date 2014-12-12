@@ -17,7 +17,7 @@ public class Premio {
 	
 	public Premio() {
 		super();
-		//  constructor por defecto
+		// constructor por defecto
 	}
 	
 	//Getters and Setters

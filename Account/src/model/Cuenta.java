@@ -41,7 +41,7 @@ public class Cuenta {
 	//constructor por defecto, agregado por Cesar
 	public Cuenta() {
 		super();
-		// TODO Auto-generated constructor stub
+		// constructor por defecto
 	}
 
 	//Getters and Setters
