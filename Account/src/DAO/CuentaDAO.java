@@ -22,7 +22,10 @@ public class CuentaDAO {
 	protected ResultSet rst2 = null;
 	protected ResultSet rst1 = null;
 	private Iterator<Premio> cp;
-
+	protected List<Premio> premios = new ArrayList<>();
+	protected List<Cuenta> cuentas = new ArrayList<>();
+    protected Cuenta cuenta= new Cuenta();
+    
 	public void saveAccount(Cuenta cuenta) throws Throwable {
 
 		st = Conectar.connectDB().createStatement();
@@ -73,9 +76,7 @@ public class CuentaDAO {
 		// este ID es de de cuenta
 		st = Conectar.connectDB().createStatement();
 
-		List<Premio> premios = new ArrayList<>();
-		Cuenta cuenta= new Cuenta();
-		Premio premio= new Premio();
+
 				
 
 		// etapa donde se obtiene todos los premios asociados al paremetro
@@ -92,9 +93,11 @@ public class CuentaDAO {
 		}  
         try {
 			while (rst2.next()){  
-				
+				Premio premio= new Premio();
+
+
 				premio.setIdPremio(rst2.getInt("idpremio")); //fijrme los tipos
-				premio.setNombrePremio("nombre");
+				premio.setNombrePremio("nombrePremio");
 				premio.setPuntos(rst2.getInt("puntos"));
 				premios.add(premio);
 			}
@@ -117,7 +120,7 @@ public class CuentaDAO {
 			}  
 	        try {
 				while (rst1.next()){  
-					
+					Cuenta cuenta= new Cuenta();	
 					cuenta.setId(rst1.getInt("idcuenta")); //fijrme los tipos
 					cuenta.setNombre(rst1.getString("nombre"));
 					cuenta.setApellido(rst1.getString("apellido"));
@@ -142,6 +145,9 @@ public class CuentaDAO {
 		sql="DELETE FROM  cuenta WHERE idCuenta="+id+"";
 		
 		st.execute(sql);
+		
+		sql="DELETE FROM  cuentaPremio WHERE idCuenta="+id+"";
+		st.execute(sql);
 	}
 
 	public void updateAccount(Cuenta cuenta) throws Throwable {
@@ -155,11 +161,20 @@ public class CuentaDAO {
 
 	}
 
-	public ResultSet seeAll() throws SQLException {
-		 st=Conectar.connectDB().createStatement();
-		
-		return	rst1 = st.executeQuery("select * from cuenta");
-	
+	public List<Cuenta> getOnlyAccounts() throws SQLException {
+		st=Conectar.connectDB().createStatement();
+			
+			while (rst2.next()){  
+				
+				cuenta.setId(rst2.getInt("idpremio")); //fijrme los tipos
+				cuenta.setNombre(rst2.getString("nombre"));
+				cuenta.setApellido(rst2.getString("apellido"));
+				cuenta.setEmail(rst2.getString("email"));
+				cuenta.setPuntos(rst2.getInt("puntos"));
+				cuentas.add(cuenta);
+			}	
+		 
+		return	cuentas;
 	}
 	
 }
