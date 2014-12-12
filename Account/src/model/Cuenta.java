@@ -26,7 +26,7 @@ public class Cuenta {
 		this.premiosCuenta = premiosCuenta;
 	}
 	
-	//sobre carga
+	//sobre carga de constructor, agregado por Cesar
 	public Cuenta(int id, String nombre, String apellido, String email,
 			int puntos) {
 		super();
@@ -38,7 +38,7 @@ public class Cuenta {
 		
 	}
 	
-	//agregado por Cesar
+	//constructor por defecto, agregado por Cesar
 	public Cuenta() {
 		super();
 		// TODO Auto-generated constructor stub
