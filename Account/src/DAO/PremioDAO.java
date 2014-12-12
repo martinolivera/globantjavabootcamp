@@ -8,6 +8,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
+
+
+
+
+
+import model.Cuenta;
 import model.Premio;
 
 
@@ -18,8 +25,12 @@ public class PremioDAO {
 	protected String     sql  = null;  
 	protected String     sql2  = null;  
 	protected ResultSet  rst1 = null;
+	protected ResultSet  rst2 = null;
 	private Iterator<Premio> cp; 
-	
+    protected ArrayList<Cuenta> cuentas = new ArrayList<>();
+    protected ArrayList<Premio> premios = new ArrayList<>();
+
+
 	public void saveReward(Premio reward) throws Throwable {
 		
 		//conecto a la bd
@@ -116,12 +127,44 @@ public class PremioDAO {
 				
 	}
 	
-	public ResultSet seeAll() throws SQLException {
+	public ArrayList<Cuenta> seeAll() throws SQLException {
 		
 		 st=Conectar.connectDB().createStatement(); 
 			
-			return rst1 = st.executeQuery("select * from premio");
+		rst2= st.executeQuery("select idpremio, nombrePremio, puntos from premio");
+			 
+		while (rst2.next()){  
+			Cuenta cuenta= new Cuenta();
+
+			cuenta.setId(rst2.getInt("idpremio")); //fijrme los tipos
+			cuenta.setNombre(rst2.getString("nombre"));
+			cuenta.setApellido(rst2.getString("apellido"));
+			cuenta.setEmail(rst2.getString("email"));
+			cuenta.setPuntos(rst2.getInt("puntos"));
+			cuentas.add(cuenta);
+		}
 	
+	 
+	return	cuentas;
+
+}
+	
+	public ArrayList<Premio> findByCuenta(Integer id) throws SQLException {
+		 st=Conectar.connectDB().createStatement(); 
+
+			sql="select premio.idpremio, nombrePremio, premio.puntos from  cuentapremio join premio on cuentapremio.idpremio = premio.idpremio where cuentapremio.idcuenta ='"+id.toString()+"'";
+			rst2 = st.executeQuery(sql);
+			while (rst2.next()){  
+				Premio premio= new Premio();
+
+				premio.setIdPremio(rst2.getInt("idpremio")); 
+				premio.setNombrePremio(rst2.getString("nombrePremio"));
+				premio.setPuntos(rst2.getInt("puntos"));
+				premios.add(premio);
+			}
+		
+		 
+		return premios;
 	}
 	
 }
