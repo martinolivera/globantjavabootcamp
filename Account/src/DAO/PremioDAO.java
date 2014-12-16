@@ -138,12 +138,9 @@ public class PremioDAO {
 			cuenta.setEmail(rst2.getString("email"));
 			cuenta.setPuntos(rst2.getInt("puntos"));
 			cuentas.add(cuenta);
-		}
-	
-	 
+		}	 
 	return	cuentas;
-
-}
+	}
 	
 	public ArrayList<Premio> findByCuenta(Integer id) throws SQLException {
 		 st=Conectar.connectDB().createStatement(); 
@@ -157,9 +154,7 @@ public class PremioDAO {
 				premio.setNombrePremio(rst2.getString("nombrePremio"));
 				premio.setPuntos(rst2.getInt("puntos"));
 				premios.add(premio);
-			}
-		
-		 
+			}		 
 		return premios;
 	}
 	

@@ -72,6 +72,17 @@ public class CuentaDAO {
 		
 	}
 
+	public void  setNewSigleAccount(Cuenta cuenta) throws SQLException {
+		st=Conectar.connectDB().createStatement();
+		
+		sql2 ="INSERT INTO Cuenta (nombre, apellido, email, puntos) VALUES ('" + cuenta.getNombre()+ "',"
+	      		+ "'" + cuenta.getApellido() + "','" + cuenta.getEmail() + "','" + cuenta.getPuntos()+ "') ";
+		
+		rst2=st.executeQuery(sql);
+		
+	}	
+	
+	
 	public Cuenta findAccountById(Integer id) throws SQLException {
 		// este ID es de de cuenta
 		st = Conectar.connectDB().createStatement();
