@@ -1,11 +1,15 @@
 package model;
 
+import state.State;
+import state.StateOn;
+
 public class Premio {
 	
 	//Attributes
 	private int idPremio;
 	private String nombrePremio;
 	private int puntos;
+	private State state;
 	
 	//Constructor
 	public Premio(int idPremio, String nombrePremio, int puntos) {
@@ -13,6 +17,7 @@ public class Premio {
 		this.idPremio = idPremio;
 		this.nombrePremio = nombrePremio;
 		this.puntos = puntos;
+		this.state = new StateOn();
 	}
 	
 	public Premio() {
@@ -45,4 +50,19 @@ public class Premio {
 		this.puntos = puntos;
 	}
 	
+	//Métodos para manipular la disponibilidad del premio, el estado en sí:
+	public boolean availability (){
+		//Retorna si está disponible el premio
+		return this.state.state();
+	}
+	
+	public void nonAvaible (){
+		//Seteo la variable en estado no disponible:
+		this.state = state.stateOff();
+	}
+	
+	public void avaible(){
+		//Seteo la variable en estado disponible:
+		this.state = state.stateOn();
+	}
 }
