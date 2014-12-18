@@ -72,7 +72,7 @@ public class PremioDAO {
 		// Para cada premio, cuenta.getPremios(), para cada premio CuentaPremio.save(idCuenta, idPremio).
 		Premio reward = new Premio();
 		
-				  sql= "select idPremio, nombrePremio, puntos from  premio where idPremio='"+id.toString()+"'";
+				  sql= "select idPremio, nombrePremio, puntos, cantidad from  premio where idPremio='"+id.toString()+"'";
 				  
 				  try {
 						rst1=st.executeQuery(sql);
@@ -85,6 +85,11 @@ public class PremioDAO {
 							reward.setIdPremio(rst1.getInt("idpremio")); //fijrme los tipo
 							reward.setNombrePremio("nombrePremio");
 							reward.setPuntos(rst1.getInt("puntos"));
+							if (rst1.getInt("cantidad") > 0) {
+								reward.available();
+							} else {
+								reward.nonAvailable();
+							}
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();

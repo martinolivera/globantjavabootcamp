@@ -1,20 +1,18 @@
 package state;
 
-public class StateOn extends State {
+public class StateOn implements State {
 	
-	@Override
-	public State stateOn() {
+	public State stateAvailable() {
 		//Se retorna la instancia actual, si ya estaba en on, no la modifico:
 		return this;
 	}
 
-	@Override
-	public State stateOff() {
+	
+	public State stateNonAvailable() {
 		// Retorna una instancia de estado en off:
 		return new StateOff();
 	}
 
-	@Override
 	public boolean state() {
 		return true;
 	}

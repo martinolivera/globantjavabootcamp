@@ -56,13 +56,13 @@ public class Premio {
 		return this.state.state();
 	}
 	
-	public void nonAvaible (){
+	public void nonAvailable (){
 		//Seteo la variable en estado no disponible:
-		this.state = state.stateOff();
+		this.state = state.stateNonAvailable();
 	}
 	
-	public void avaible(){
+	public void available(){
 		//Seteo la variable en estado disponible:
-		this.state = state.stateOn();
+		this.state = state.stateAvailable();
 	}
 }

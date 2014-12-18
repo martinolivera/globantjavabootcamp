@@ -1,11 +1,11 @@
 package state;
 
-public abstract class State {
+public interface State {
 
-	public abstract State stateOn();
+	public State stateAvailable();
 	
-	public abstract State stateOff();
+	public  State stateNonAvailable();
 	
-	public abstract boolean state ();
+	public  boolean state ();
 	
 }
